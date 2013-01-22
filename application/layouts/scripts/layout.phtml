@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>NAN Admin Home</title>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/grey.css" />
+		<link rel="stylesheet" href="css/datagrid.css" />
+		 <link rel="stylesheet" href="css/datepicker.css" />
+		 <link rel="stylesheet" href="css/select2.css" />		
+		
+	</head>
+	<body>
+		
+		
+		<div id="header">
+			<a href="index.html"><h1>NAN</h1></a>		
+		</div>
+		<div id="user-nav" class="navbar navbar-inverse">
+                    <?php echo $this->loggedInAs(); ?>
+                </div>
+            
+		<div id="sidebar">
+			<a href="#" class="visible-phone"><i class="icon icon-home"></i> Home</a>
+			<ul>
+				<li ><a href="#"><i class="icon icon-home"></i> <span>Home</span></a></li>
+				<li><a href="#"><i class="icon icon-tasks"></i> <span>Annual Plan</span></a></li>
+				<li class="active"><a href="activity.html"><i class="icon icon-list-alt"></i> <span>E-ship Activities</span></a></li>
+				<li><a href="participants.html"><i class="icon icon-list-alt"></i> <span>Entrepreneurship Activities</span></a></li>
+				<li class="submenu">
+				<a href="#"><i class="icon icon-pencil"></i> <span>Institute Capacity</span><span class="label">5</span></a>
+							<ul>
+								<li><a href="#">FDP</a></li>																				
+								<li><a href="#">E Cell</a></li>
+								<li><a href="#">Campus Company</a></li>
+								<li><a href="#">EDC</a></li>
+								<li><a href="#">SVMU/ESC</a></li>																
+							</ul>
+				</li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-file"></i> <span>Reports</span> <span class="label">3</span></a>
+					<ul>
+						<li><a href="activity.html">Activity Info</a></li>
+						<li><a href="#">Contributers</a></li>
+						<li><a href="participants.html">Participants</a></li>
+					</ul>
+					</li>
+					<li><a href="#"><i class="icon icon-th"></i> <span>Settings</span></a></li>
+			</ul>
+		</div>
+		
+	
+		
+		<div id="content">
+		<?php echo $this->layout()->content ?>	
+		</div>
+		
+
+           
+              <script src="js/jquery.js"></script>
+            
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap-colorpicker.js"></script>
+            <script src="js/bootstrap-datepicker.js"></script>
+            <script src="js/jquery.uniform.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/unicorn.js"></script>
+            <script src="js/unicorn.form_common.js"></script>
+			
+           
+			
+            
+	</body>
+</html>
