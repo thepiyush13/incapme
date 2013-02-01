@@ -16,6 +16,7 @@ class Application_Model_Activity extends Application_Model_Db
     }
     
     public function insertActivityInfo($data) {
+        //add institute field in the view file
         $result = array(); 
         
         $aR = array();
@@ -99,9 +100,62 @@ class Application_Model_Activity extends Application_Model_Db
         return $result;
     }
     public function insertParticipants($data) {
-        $result = array();
+        /**
+         * the form has the uploaded files and the fields are upated as per the upload
+         * get the uploaded file 
+         * validate the template 
+         * insert the data to the respective column 
+         * get the inserted data - if success - call the next view
+         * 
+         */
+        $result = array();         
+        $aR = array();  
+        $vals = array();
+        $sql = array();
         $activityId  = mysql_real_escape_string ( $data['activity_id'] );
-        $result['activity_id'] = $activityId; 
+        //$data  = array_map('mysql_real_escape_string', $data);
+        //calulate count fields 
+        $activitybeneficiaries_number = mysql_real_escape_string ($data['activitybeneficiaries_number']) ;
+        $activitybeneficiaries_institute = mysql_real_escape_string ($data['activitybeneficiaries_institute']);
+        $activitybeneficiaries_fees = mysql_real_escape_string ($data['activitybeneficiaries_fees']) ;        
+        $participantFile = $data['file']  ;
+        
+        if($participant){
+            $options = array('mime'=>'text/csv','size'=>50000);
+            $result = $this->_uploadFile($participantFile,$options);
+            
+            if($result['error']){
+                return $result;                
+              }
+            
+            $query = $result['data'];
+            $this->mysqli->autocommit(FALSE);
+            $qR = $this->mysqli->query($value);
+
+            if(!$qR){
+                $this->mysqli->rollback();
+                $result['error'] = 'Could not Insert the data:'.$this->mysqli->error;  
+                return $result;
+                 }
+
+            $out = $this->mysqli->commit();
+            $activitybeneficiaries_number = $this->mysqli->query('SELECT DISTINCT COUNT(*) FROM activity_participants WHERE activity_id='.$activityId);
+            //$activitybeneficiaries_institute = $this->mysqli->query('SELECT DISTINCT COUNT(*) FROM activity_participants WHERE activity_id='.$activityId.' AND category="student"');
+                     
+       
+        }
+        
+        
+        $vals = array();   
+        // the main activity table
+        $stmt = 'activitybeneficiaries_number="'.$activitybeneficiaries_number.'",activitybeneficiaries_institute="'.$activitybeneficiaries_institute.'"';        $sql = 'UPDATE activity SET '.$stmt.' WHERE activity_id='.$activityId;   
+        $qR = $this->mysqli->query($value);  
+        if(!$qR){
+            $result['error'] = 'Could not Insert the activity:'.$this->mysqli->error; 
+            return $result;
+        }
+        $result['success'] = 'Successfully updated the activity'; 
+        $result['activity_id'] = $activityId;   
         return $result;
     }
     function insertOutcomes ($data) {
@@ -318,7 +372,56 @@ class Application_Model_Activity extends Application_Model_Db
          $query  = 'INSERT INTO '.$data['table']. $cols .' VALUES'.implode(',',$vals); 
           return $query;
    }
-    
+   
+   protected function _uploadFile($data,$options){
+        $query = array();
+        $vals = array();
+        $goodtogo = true;
+        $allowedmimes = $options['mime'];
+        $size = $options['size'];
+        try{
+            if ( ($_FILES[$data['name']]['size'] == 0) || ($_FILES[$data['name']]['size'] > $size)   ){
+                $goodtogo = false;
+                throw new exception ("Could not upload the file: Invalid File Format");
+            }
+        }
+        catch (exception $e) {
+            $result['error'] = $e->getmessage();
+        }
+
+        try {
+            $target = "uploads/".$_FILES[$data['name']]['name'].".csv";
+            $source  = $_FILES[$data['name']]['tmp_name']; 
+            if (!move_uploaded_file ($source,$target) ){
+            $goodtogo = false;
+            throw new exception ("There was an error moving the file.");
+            }
+            
+        } catch (exception $e) {
+            $result['error'] =  $e->getmessage();
+        }
+        
+        
+        if($goodtogo){
+                $row = 1;
+                if (($handle = fopen($target, "r")) !== FALSE) {
+                    while (($line = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                        if($row ==1){
+                            $cols  = '("'.implode('","',$line ).'")';
+                        }else{
+                            $vals[] = '("'. implode('","',$line).'")';
+                        }
+                        $row++;
+                    }
+                    fclose($handle);
+                }
+            }
+        
+         
+         
+         $result['data']  = 'INSERT INTO '.$data['table']. $cols .' VALUES'.implode(',',$vals); 
+         return $result;
+   }
 }
 
 
