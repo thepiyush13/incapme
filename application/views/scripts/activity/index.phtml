@@ -1,0 +1,44 @@
+<br /><br />  
+<style>
+    .listActivity tr td{
+        border:1px solid black;
+    }
+    .table td{
+        /* word-break:break-all; */
+        height: 80px;
+    }
+    .table{
+        width:100%;
+    }
+    
+</style>
+                      <?php echo $this->breadcrumb() ?>
+<!-- Error messages for the form -->
+<?php echo print_r($this->result, 1); ?>
+    <?php if (   ( !empty($this->output['error'])) || ( !empty($this->output['success']))  ) { ?>
+    <ul>
+    <?php foreach ($this->output as $message) { ?>
+    <li> <?php echo $message; ?> </li>
+    <?php }; ?>
+    <ul>
+<?php } ?>
+<!-- end error messages -->
+<div>
+    <?php 
+    $data  = $this->output ;
+    echo $data['data'];
+    
+    ?>
+    
+    
+    
+</div>
+<div id="view-content">
+	
+        <form name="deleteActivity" method="post" action="delete/" >
+        <input type="hidden" name="activityId" id="activityId" value="activity1" />
+        <input type="text" name="test" id="test" value="activity1" />
+        <input type="submit" name="delete" value="delete" />
+        </form>
+        
+</div>

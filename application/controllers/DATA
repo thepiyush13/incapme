@@ -1,0 +1,59 @@
+            
+    function addAction($type){
+            $data = $this->_request->getPost();
+            $nextForm = array('insertActivityInfo'=>'insertContributors','insertContributors'=>'insertParticipants','insertParticipants'=>'insertOutcomes');
+            $isValid = $this->_validation($data, $type);
+            
+            if ( $isValid['status'] == FALSE ){
+                $this->view->output['error']  = $isValid['data'] ;
+                echo $this->view->render('activity/'.$type.'.phtml'); 
+            }
+            
+            $mdl  = new Application_Model_Activity();
+            $output = $mdl->$type($data);
+            $this->view->output = $output ;
+            
+            if($output['error']){
+                echo $this->view->render('activity/'.$type.'.phtml'); 
+            }
+            
+            echo $this->view->render('activity/'.$nextForm[$type].'.phtml');
+
+}
+
+=============================== validate ======================
+protected function _validation($data, $type = null){
+        $required = array(
+        'insertActivityInfo'=>array( 'field_name'=>'zend::alpha',''=>''), 
+        'insertContributors'=>array( 'field_name'=>'zend::alpha',''=>''),
+        'insertParticipants'=>array( 'field_name'=>'zend::alpha',''=>''),
+        'insertOutcomes'=>array( 'field_name'=>'zend::alpha',''=>'')
+        );
+        foreach($required[$type] as $field=>$validation){
+            $vR = $validation($data[field]);
+            if( !$vR ){
+                $output[error][] = $vR->getMessage();
+            }
+        }
+        return $output;
+        
+    }
+
+==========================
+
+    $aR = array();
+    foreach($data as $col=>$val){
+        $col 
+        $aR[$col] = $val;
+}
+
+
+===================
+$escapedGet = array_map('mysql_real_escape_string', $_POST);
+
+
+
+===
+"BEGIN; INSERT INTO activity_contributor_corodinator(activity_id,human_id,unmapped_coordinator) VALUES(1,null,"piyush"),(1,null,"prakash"),(1,null,"kanchan");INSERT INTO activity_contributor_lead_presenter(activity_id,human_id,unmapped_presenter) VALUES(1,null,"piyush"),(1,null,"prakash"),(1,null,"kanchan"),(1,null,"hari"),(1,null,"mohan");UPDATE activity SET activitycontributor_sponsors="",activitycontributor_partner="",activity_id=1 WHERE activity_id=;COMMIT;"
+
+ BEGIN; INSERT INTO activity_contributor_corodinator(activity_id,human_id,unmapped_coordinator) VALUES(1,null,"piyush"),(1,null,"prakash"),(1,null,"kanchan");INSERT INTO activity_contributor_lead_presenter(activity_id,human_id,unmapped_presenter) VALUES;UPDATE activity SET activitycontributor_sponsors="spnsores1",activitycontributor_partner="partner1-2001 WHERE activity_id=1;COMMIT;

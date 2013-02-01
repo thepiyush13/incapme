@@ -1,0 +1,160 @@
+<div class="span12">
+								<div class="widget-box">
+									<div class="widget-title">
+										<span class="icon">
+											<i class="icon-pencil"></i>
+										</span>
+										<h5>Create new activity</h5>
+									</div>
+									<div class="widget-content nopadding">
+										<form  class="form-horizontal" name="insertactivityinfo" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertActivityInfo" method="post" >
+											
+
+											<div class="control-group">
+													<div class="span9 offset2">
+														<div class="row-fluid">
+																<div class="btn-group ">
+																	 <button class="btn btn-large btn-success">Activity Info</button>
+																	  <button class="btn btn-large">Contributors</button>
+																	  <button class="btn btn-large">Participants</button>
+																	  <button class="btn btn-large">Outcomes</button>
+																</div>
+														</div>
+													</div>
+											</div>
+											<div class="control-group">
+																<label class="control-label">Activity Information :-</label>
+																
+														</div>
+											<div class="control-group">
+													<label class="control-label">Activity Name :</label>
+													<div class="controls">
+														<input id="activityinfo_title" type="text" name="activityinfo_title" placeholder="Please don't use short forms" />
+													</div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">Type :</label>
+													<div id="activity-type" class="controls">
+														<select id="activityinfo_type" name="activityinfo_type">
+																<option>Pannel Discussion</option>
+																<option>Lecture/Talk</option>
+																<option>Excercise/Game</option>
+																<option>Conference</option>
+																<option>Competition</option>
+																<option>Workshop</option>
+																<option>Course</option>
+																<option>Mentoring</option>
+																<option>Startup Support</option>
+																<option>Outreach</option>
+																<option>Webinar</option>
+																<option>Review</option>
+																<option>National Platform</option>
+														</select>
+													</div>
+												</div>
+													<div class="control-group">
+														<label class="control-label">Scale :</label>
+														<div class="controls">
+																<select id="activityinfo_scale" name="activityinfo_scale">
+																		<option>Local</option>
+																		<option>National</option>
+																		<option>International</option>	
+																</select>
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Organised by :</label>
+															<div class="controls">
+                                                                
+																	<select id="activityinfo_organisingentity" name="activityinfo_organisingentity">
+																			<option>E-cell</option>
+																			<option>ESC</option>
+																			<option>EDC</option>
+																			<option>CC</option>
+																			<option>IEDC</option>
+																			<option>SVMU</option>
+																			<option>TBI</option>
+																			<option>Faculty</option>
+																			<option>Alumni Association</option>
+																			<option>NEN</option>
+																			<option>E club</option>
+																			<option>Others</option>
+																		</select>
+															</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Level :</label>
+														<div class="controls">
+																	<select id="activityinfo_level" id="activityinfo_level">
+																		<option>Basic</option>
+																		<option>Intermediate</option>
+																		<option>Advance</option>
+																	</select>
+														</div>
+													</div>
+													<div id="course-credit" class="control-group">
+															<label class="control-label">Course Credits :</label>
+															<div class="controls">
+																	<select id="activityinfo_scale" name="activityinfo_scale">
+																			<option>Credit 1</option>
+																			<option>Credit 2</option>
+																			<option>Credit 3</option>
+																			<option>NA</option>
+																			
+																	</select>
+															</div>
+													</div>
+													<div class="control-group">
+																	<div class="widget-title"><span class="icon"><i class="icon-time"></i></span>
+																			<h5>Activity Place Time</h5>
+																	
+																	</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">City:</label>
+														<div class="controls">
+															<select id="activity_city" name="activity_city">
+																<option>Institute City</option>
+																<option>option 1</option>
+																<option>option 2</option>
+																<option>option 3</option>
+																<option>option 4</option>
+															</select>
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Venue :</label>
+														<div class="controls">
+															<select id="activityplacetime_venue" name="activityplacetime_venue">
+																<option>List of College Name</option>
+																<option>National Institute of Technology</option>
+																<option>Shoba Institute of Engineering</option>	
+															</select>
+														</div>
+												</div>	
+                                                                                            	
+												<div class="control-group">
+														<label class="control-label">Start Date :</label>
+															<div class="controls form-input">
+																<input type="text" data-date="15-01-2013" name="activityplacetime_date_start" id="activityplacetime_date_start" data-date-format="dd-mm-yyyy"  class="datepicker" />
+															</div>
+												</div>
+												<div  id="activity-duration" class="control-group">
+															<label class="control-label">Duration :</label>
+															<div class="controls form-input">
+																<input type="number" name="activityplacetime_duration" id="activityplacetime_duration" placeholder="No. of Days (Ex: 2)">
+															</div> 
+												</div>
+                                                                                            
+                                                                                           
+										</div>
+											<div class="form-actions">
+													<input type="submit" class="btn btn-primary"  value="submit" />
+															
+											</div>
+												
+										</form>
+									
+								</div>
+							</div>
+						

@@ -22,6 +22,12 @@
             include APPLICATION_PATH.'/controllers/plugin/AclPlugins.php';
             include APPLICATION_PATH.'/controllers/helper/AclDynamic.php';
             include APPLICATION_PATH.'/controllers/plugin/LanguageSelector.php';
+            // Added for the support of forms 
+            set_include_path(get_include_path()
+            . PATH_SEPARATOR . ROOT_DIR . '/library/'
+            . PATH_SEPARATOR . ROOT_DIR . '/application/models/'
+            . PATH_SEPARATOR . ROOT_DIR . '/application/forms/'
+            );
             
             $auth = Zend_Auth::getInstance(); //fetch an instance of Zend_Auth
             if($auth->hasIdentity()) {

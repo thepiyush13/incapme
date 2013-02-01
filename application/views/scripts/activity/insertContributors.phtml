@@ -1,0 +1,104 @@
+<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="widget-box">
+									<div class="widget-title">
+										<span class="icon">
+											<i class="icon-pencil"></i>
+										</span>
+										<h5>Create new activity</h5>
+									</div>
+									<div class="widget-content nopadding">
+										<form  class="form-horizontal" name="insertContributors" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertContributors" method="post" >
+											
+													<div class="control-group">
+															<div class="span9 offset2">
+																	<div class="row-fluid">
+																			<div class="btn-group ">
+																					<button class="btn btn-large">Activity Info</button>
+																					<button class="btn btn-large btn-success">Contributors</button>
+																					<button class="btn btn-large">Participants</button>
+																					<button class="btn btn-large">Outcomes</button>
+																			</div>
+																	</div>
+															</div>
+													</div>
+																																		
+												
+														
+																																
+													<div class="control-group">
+															<label class="control-label">Activity Contributors :</label>
+													</div>
+													
+													<div class="control-group">
+															<div class="widget-title"><span class="icon"><i class="icon-user"></i></span>
+																	<h5>Co-ordinater Details :</h5>
+															</div>
+													</div>
+
+													<div class="control-group">
+															<label class="control-label">Select a Faculty:</label>
+                                                            <hr/>
+                                                                <input type="text" name="activitycontributor_coordinator[]" value="1" />
+                                                                <input type="text" name="activitycontributor_coordinator[]" value="2" />
+                                                                <input type="text" name="activitycontributor_coordinator[]" value="3" />
+                                                               
+                                                            <hr />
+															<div class="controls">
+																<select  name="activitycontributor_coordinator_select" id="activitycontributor_coordinator">
+																	<option>Faculty 1</option>
+																	<option>Faculty 2</option>
+																	<option>Faculty 3</option>	
+																</select> or <a href="#new_individual" data-toggle="modal" class="btn btn-mini">Create new Co-ordinator</a>
+															</div>
+												    </div>	
+													<div class="control-group">
+															<label class="control-label">Lead Speaker:</label>
+                                                            <hr/>
+                                                                <input type="text" name="activitycontributor_speaker[]" value="1" />
+                                                                <input type="text" name="activitycontributor_speaker[]" value="2" />
+                                                                <input type="text" name="activitycontributor_speaker[]" value="3" />
+                                                                <input type="text" name="activitycontributor_speaker[]" value="4" />
+                                                            <hr />
+															<div class="controls">
+																<select  name="activitycontributor_speaker_select" id="activitycontributor_coordinator">
+																	<option>Speaker 1</option>
+																	<option>Speaker 2</option>
+																	<option>Speaker 3</option>	
+																</select> or <a href="#new_individual" data-toggle="modal" class="btn btn-mini">Create new Lead Speaker</a>
+															</div>
+												    </div>			
+														
+													<div class="control-group">
+															<label class="control-label">Sponsor :</label>
+															<div class="controls form-input">
+																	<input type="number" name="activitycontributor_sponsors"  id="activitycontributor_sponsors"   placeholder="Rs: xxxx"/><span> dont require the institute , insert it into the sponsor field only</span>
+																	<input type="text" name="activitycontributor_sponsors_institute"  id="activitycontributor_sponsors_institute"   placeholder="Institute name"/>
+															</div>
+													</div>	
+													<div class="control-group">
+															<label class="control-label">Partner :</label>
+															<div class="controls form-input">
+																	<input type="text" name="activitycontributor_partner"  id="activitycontributor_partner"   placeholder="Organisation/Institute"/>
+																	
+															</div>
+													</div>	
+																						
+											</div>
+                                                                                            
+                                                                                           
+										</div>
+											<div class="form-actions">
+                                                <input type="text" name="activity_id" value="<?php echo $this->output['activity_id'] ?>" />
+
+													<input type="submit" class="btn btn-primary"  value="submit" />
+															
+											</div>
+												
+										</form>
+									
+								</div>
+							</div>
+						</div>
+					</div>

@@ -1,0 +1,137 @@
+<div class="container-fluid">
+						<div class="span4 offset3">
+							<div class="row-fluid">
+								<div class="btn-group ">
+								  <button class="btn btn-large">Activity Info</button>
+								   <button class="btn btn-large">Contributors</button>
+								  <button class="btn btn-large btn-primary">Participants</button>
+								  <button class="btn btn-large">Outcomes</button>
+								</div>
+							</div>
+						</div>
+						
+				<div class="row-fluid">
+				
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-align-justify"></i>									
+								</span>
+								<h5>Activity Participants</h5>
+							</div>
+							<div class="widget-content nopadding">
+								<form action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertParticipants" method="post" class="form-horizontal">
+								
+									<div class="control-group">
+										<label class="control-label">Number of Participants :</label>
+										<div class="controls form-input">
+											<input type="text" required="required" placeholder="Count" name="activitybeneficiaries_number">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Number of Participants from Institute :</label>
+										<div class="controls form-input">
+											<input type="text" required="required" placeholder="Count" name="activitybeneficiaries_institute">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Total Fees Collected :</label>
+										<div class="controls form-input">
+											<input type="text" required="required" placeholder="Rs: xxxx" name="activitybeneficiaries_fees">
+										</div>
+									</div>
+                                                                    <input type="text" name="activity_id" id="activity_id" value="<?php echo $this->output['id']; ?>" />									
+								<input id="next" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="submit" value="Next">
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-align-justify"></i>									
+								</span>
+								<h5>Participant Details</h5>
+							</div>
+							<div class="widget-content nopadding">
+								<form action="#" method="get" class="form-horizontal">
+								
+									<div class="control-group">
+										<label class="control-label">Participants Details:</label>
+										
+									</div>
+									
+									<div class="control-group">
+										
+												<div class="controls">
+										
+													<div class="span4">
+														<div class="uploader" id="uniform-undefined"><input type="file" size="19" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div><button class="btn btn-mini ">Upload</button>
+													</div>
+														<div class="span3 dwnd-link"><i class="icon-download-alt"></i><a href="#"> Download Template</a></div>
+																				
+												</div>
+									</div>
+								</form>
+							
+							<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Students / Entrepreneur</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Email Id</th>
+											<th>Mobile No.</th>
+											<th>Fees Paid</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Row 1</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+										</tr>
+										<tr>
+											<td>Row 1</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+										</tr>
+										<tr>
+											<td>Row 1</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td><i class="icon-plus"></i><a href="#"> Add an Entry</a></td>
+										</tr>
+										
+										
+										
+									</tbody>
+								</table>	
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row-fluid">
+					<div id="footer" class="span12">
+						2012 © NAN Admin.
+					</div>
+				</div>
+			</div>

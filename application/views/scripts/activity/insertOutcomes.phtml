@@ -1,0 +1,121 @@
+<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="widget-box">
+									<div class="widget-title">
+										<span class="icon">
+											<i class="icon-pencil"></i>
+										</span>
+										<h5>Create new activity</h5>
+									</div>
+									<div class="widget-content nopadding">
+										<form  class="form-horizontal" name="insertactivityoutcome" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertOutcomes" method="post" >
+											
+													<div class="control-group">
+													<div class="span9 offset2">
+														<div class="row-fluid">
+															<div class="btn-group ">
+																<button class="btn btn-large">Activity Info</button>
+																<button class="btn btn-large">Contributors</button>
+																<button class="btn btn-large">Participants</button>
+																<button class="btn btn-large btn-success">Outcomes</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												
+												
+												<div class="control-group">
+													<label class="control-label">Activity Outcomes :-</label>
+												</div>	
+												<div class="control-group">
+														<label class="control-label">Average Rating Instructor :</label>
+														<div class="controls form-input">
+															<input type="text" name="activityoutcome_instructor" id="activityoutcome_instructor"  placeholder="Out of 5"/>
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Average Rating Course :</label>
+														<div class="controls form-input">
+															<input type="text" name="activityoutcome_course" id="activityoutcome_course"  placeholder="Out of 5"/>
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Average Rating Organisation :</label>
+														<div class="controls form-input">
+															<input type="text" name="activityoutcome_org" id="activityoutcome_org"  placeholder="Out of 5"/>
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Is Follow-up planned ?</label>
+														<div class="controls">
+															<label><input type="radio" name="activityoutcome_plan" value="1"/> Yes</label>
+															<label><input type="radio" name="activityoutcome_plan" value="0"/> No</label>
+														</div>
+												</div>
+                                                                                                <div class="control-group">
+														<label class="control-label">Follow-up Details :</label>
+														<div class="controls form-input">
+															<input type="text" name="activityoutcome_detail" id="activityoutcome_detail"  placeholder="Activity Description"/>
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Number of Ideas :</label>
+														<div class="controls form-input">
+															<input type="number" name="activityoutcome_idea" id="activityoutcome_idea" placeholder="Number of Ideas" />
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Winning Ideas :</label>
+														<div class="controls form-input">
+															<textarea name="activityoutcome_idea" id="activityoutcome_idea"  placeholder="Brief description about the ideas"/></textarea>
+														</div>
+												</div>
+												<div class="control-group">
+															<label class="control-label">Winning Institution:</label>
+															<div class="controls">
+																<select  name="activityoutcome_institution" id="aactivityoutcome_institution">
+																	<option value="1">Institution Name</option>
+																	<option value="2">National Institute of Technology</option>
+																	<option value="3">Shoba Institute of Engineering</option>	
+																</select>
+															</div>
+												</div>																					
+												<div class="control-group">
+														<label class="control-label">Number of Mentees :</label>
+														<div class="controls form-input">
+															<input type="number" name="activityoutcome_mentees" id="activityoutcome_mentees" placeholder="Number of Mentees" />
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Nunber of Mentors :</label>
+														<div class="controls form-input">
+															<input type="number" name="activityoutcome_mentors" id="activityoutcome_mentors" placeholder="Nunber of Mentors" />
+														</div>
+												</div>	
+                           <input type="text" name="activityoutcome_menteeslist[]" id="activityoutcome_menteeslist[]" value="f1|l-e|email-e" />
+                            <input type="text" name="activityoutcome_menteeslist[]" id="activityoutcome_menteeslist[]" value="f2|l-e|email-e" />
+                             <input type="text" name="activityoutcome_menteeslist[]" id="activityoutcome_menteeslist[]" value="f3|l-e|email-e" />
+                              <input type="text" name="activityoutcome_menteeslist[]" id="activityoutcome_menteeslist[]" value="f4|l-e|email-e" />
+                              <hr/>
+                              <input type="text" name="activityoutcome_mentorslist[]" id="activityoutcome_mentorslist[]" value="2f1|l-m|email-m" />
+                            <input type="text" name="activityoutcome_mentorslist[]" id="activityoutcome_mentorslist[]" value="2f1|l-m|email-m" />
+                             <input type="text" name="activityoutcome_mentorslist[]" id="activityoutcome_mentorslist[]" value="2f1|l-m|email-m" />
+                              <input type="text" name="activityoutcome_mentorslist[]" id="activityoutcome_mentorslist[]" value="2f1|l-m|email-m" />
+                              <hr/>
+											</div>
+                                                                                            
+                                                                                           
+										</div>
+											<div class="form-actions">
+                                                <input type="text" name="activity_id" value="<?php echo $this->output['activity_id'] ?>" />
+													<input type="submit" class="btn btn-primary"  value="submit" />
+															
+											</div>
+												
+										</form>
+									
+								</div>
+							</div>
+						</div>
+					</div>

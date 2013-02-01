@@ -6,13 +6,14 @@ defined('APPLICATION_PATH')
 
 // Define application environment
 defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),
     get_include_path(),
 )));
+
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
@@ -22,5 +23,23 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
+ $config = new Zend_Config(
+    array(
+        'database' => array(
+            'adapter' => 'Mysqli',
+            'params'  => array(
+                'host'     => '127.0.0.1',
+                'dbname'   => 'test',
+                'username' => 'root',
+                'password' => '',
+            )
+        )
+    )
+);
+ 
+$db = Zend_Db::factory($config->database);
+
+
+Zend_Registry::set('db', $db);
 $application->bootstrap()
             ->run();

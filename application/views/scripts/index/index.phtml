@@ -1,9 +1,19 @@
+<!-- Error messages for the form -->
+<?php if (!empty($this->output)) { ?>
+    <ul>
+    <?php foreach ($this->output as $message) { ?>
+    <li> <?php echo $message; ?> </li>
+    <?php }; ?>
+    <ul>
+<?php } ?>
+<!-- end error messages -->
 <div id="content-header">
 				<h1>Home</h1>
 			</div>
 			
                         <?php echo $this->breadcrumb() ?>
-                       
+                               <h1>Log in</h1>
+
 			<div class="container-fluid">
 						<div class="span4 offset3">
 							<div class="row-fluid">

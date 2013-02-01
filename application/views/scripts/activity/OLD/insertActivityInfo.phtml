@@ -1,0 +1,283 @@
+<div class="container-fluid">
+					
+						
+					<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="widget-box">
+									<div class="widget-title">
+										<span class="icon">
+											<i class="icon-pencil"></i>
+										</span>
+										<h5>Create new activity</h5>
+									</div>
+								<div class="widget-content nopadding">
+										<form id="activity-wizard" class="form-horizontal ui-formwizard" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertActivityInfo" novalidate="novalidate">
+											<div id="form-wizard-1" class="step ui-formwizard-content" style="display: block;">
+
+											<div class="control-group">
+													<div class="span9 offset2">
+														<div class="row-fluid">
+																<div class="btn-group ">
+																	 <button class="btn btn-large btn-success ui-wizard-content ui-formwizard-button" value="Next">Activity Info</button>
+																	  <button class="btn btn-large ui-wizard-content ui-formwizard-button" value="Next">Contributors</button>
+																	  <button class="btn btn-large ui-wizard-content ui-formwizard-button" value="Next">Participants</button>
+																	  <button class="btn btn-large ui-wizard-content ui-formwizard-button" value="Next">Outcomes</button>
+																</div>
+														</div>
+													</div>
+											</div>
+											<div class="control-group">
+																<label class="control-label">Activity Information :-</label>
+																
+														</div>
+											<div class="control-group">
+													<label class="control-label">Activity Name :</label>
+													<div class="controls">
+														<input id="activity_name" type="text" name="activity_name" placeholder="Please don't use short forms" class="ui-wizard-content">
+													</div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">Type :</label>
+													<div class="controls">
+														<div class="select2-container ui-wizard-content" id="s2id_activityinfo_type">    <a href="#" onclick="return false;" class="select2-choice">   <span>Pannel Discussion</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activityinfo_type" name="activityinfo_type" class="ui-wizard-content" style="display: none;">
+																<option>Pannel Discussion</option>
+																<option>Lecture/Talk</option>
+																<option>Excercise/Game</option>
+																<option>Confrence</option>
+																<option>Competition</option>
+																<option>Workshop</option>
+																<option>Course</option>
+																<option>Mentoring</option>
+																<option>Startup Support</option>
+																<option>Outreach</option>
+																<option>Review Webinar</option>
+																<option>National Platform</option>
+														</select>
+													</div>
+												</div>
+													<div class="control-group">
+														<label class="control-label">Scale :</label>
+														<div class="controls">
+																<div class="select2-container ui-wizard-content" id="s2id_activityinfo_scale">    <a href="#" onclick="return false;" class="select2-choice">   <span>Local</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activityinfo_scale" name="activityinfo_scale" class="ui-wizard-content" style="display: none;">
+																		<option>Local</option>
+																		<option>National</option>
+																		<option>International</option>	
+																</select>
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Organised by :</label>
+															<div class="controls">
+																	<div class="select2-container ui-wizard-content" id="s2id_activityinfo_organisingentity">    <a href="#" onclick="return false;" class="select2-choice">   <span>E-cell</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activityinfo_organisingentity" name="activityinfo_organisingentity" class="ui-wizard-content" style="display: none;">
+																			<option>E-cell</option>
+																			<option>ESC</option>
+																			<option>EDC</option>
+																			<option>CC</option>
+																			<option>IEDC</option>
+																			<option>SVMU</option>
+																			<option>TBI</option>
+																			<option>Faculty</option>
+																			<option>Alumni Association</option>
+																			<option>NEN</option>
+																			<option>E club</option>
+																			<option>Others</option>
+																		</select>
+															</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Level :</label>
+														<div class="controls">
+																	<div class="select2-container ui-wizard-content" id="s2id_activityinfo_level">    <a href="#" onclick="return false;" class="select2-choice">   <span>Basic</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activityinfo_level" class="ui-wizard-content" style="display: none;">
+																		<option>Basic</option>
+																		<option>Intermediate</option>
+																		<option>Advance</option>
+																	</select>
+														</div>
+													</div>
+													<div class="control-group">
+															<label class="control-label">Course Credits :</label>
+															<div class="controls">
+																	<div class="select2-container ui-wizard-content" id="s2id_activityinfo_scale">    <a href="#" onclick="return false;" class="select2-choice">   <span>Confrence</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activityinfo_scale" name="activityinfo_scale" class="ui-wizard-content" style="display: none;">
+																			<option>Confrence</option>
+																			<option>Competition</option>
+																			<option>Workshop</option>
+																			<option>Course</option>
+																			<option>Mentoring</option>
+																			<option>Startup Support</option>
+																			<option>Outreach</option>
+																			<option>Review</option>
+																			<option>Webinar</option>
+																			<option>National Platform</option>
+																	</select>
+															</div>
+													</div>
+													<div class="control-group">
+																	<div class="widget-title"><span class="icon"><i class="icon-time"></i></span>
+																			<h5>Activity Place Time</h5>
+																	
+																	</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">City:</label>
+														<div class="controls">
+															<div class="select2-container ui-wizard-content" id="s2id_activity_city">    <a href="#" onclick="return false;" class="select2-choice">   <span>Institute City</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activity_city" name="activity_city" class="ui-wizard-content" style="display: none;">
+																<option>Institute City</option>
+																<option>option 1</option>
+																<option>option 2</option>
+																<option>option 3</option>
+																<option>option 4</option>
+															</select>
+														</div>
+												</div>
+												<div class="control-group">
+														<label class="control-label">Venu :</label>
+														<div class="controls">
+															<div class="select2-container ui-wizard-content" id="s2id_activityplacetime_venue">    <a href="#" onclick="return false;" class="select2-choice">   <span>List of College Name</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a>    <div class="select2-drop select2-offscreen">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input" tabindex="0">   </div>   <ul class="select2-results">   </ul></div></div><select id="activityplacetime_venue" name="activityplacetime_venue" class="ui-wizard-content" style="display: none;">
+																<option>List of College Name</option>
+																<option>National Institute of Technology</option>
+																<option>Shoba Institute of Engineering</option>	
+															</select>
+														</div>
+												</div>			
+												<div class="control-group">
+														<label class="control-label">Start Date :</label>
+															<div class="controls form-input">
+																<input type="text" data-date="15-01-2013" name="activityplacetime_date_start" id="activityplacetime_date_start" data-date-format="dd-mm-yyyy" class="datepicker ui-wizard-content">
+															</div>
+												</div>
+												<div class="control-group">
+															<label class="control-label">Duration :</label>
+															<div class="controls form-input">
+																<input type="number" name="activityplacetime_duration" id="activityplacetime_duration" placeholder="No. of Days (Ex: 2)" class="ui-wizard-content">
+															</div> 
+												</div>
+											</div>
+											<div id="form-wizard-2" class="step ui-formwizard-content" style="display: none;">
+												
+														<div class="control-group">
+															<div class="span9 offset2">
+																<div class="row-fluid">
+																	<div class="btn-group ">
+																		 <button class="btn btn-large ui-wizard-content ui-formwizard-button" value="Next">Activity Info</button>
+																		  <button class="btn btn-large ui-wizard-content ui-formwizard-button" value="Next">Contributors</button>
+																		  <button class="btn btn-large btn-success ui-wizard-content ui-formwizard-button" value="Next">Participants</button>
+																		  <button class="btn btn-large ui-wizard-content ui-formwizard-button" value="Next">Outcomes</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+														<div class="control-group">
+															<label class="control-label">Activity Participants :-</label>
+														</div>
+														
+														<div class="control-group">
+															<label class="control-label">Number of Participants :</label>
+																<div class="controls form-input">
+																	<input type="number" name="activitybeneficiaries_number" id="activitybeneficiaries_number" placeholder="Count" disabled="disabled" class="ui-wizard-content">
+																</div>
+														</div>
+														
+														<div class="control-group">
+																<label class="control-label">Number of Participants from Institute :</label>
+																	<div class="controls form-input">
+																		<input type="number" name="activitybeneficiaries_institute" id="activitybeneficiaries_institute" placeholder="Count" disabled="disabled" class="ui-wizard-content">
+																	</div>
+														</div>
+														
+													<div class="control-group">
+															<label class="control-label">Total Fees Collected :</label>
+																<div class="controls form-input">
+																	<input type="number" name="activitybeneficiaries_fees" id="activitybeneficiaries_fees" placeholder="Rs: xxxx" disabled="disabled" class="ui-wizard-content">
+																</div>
+													</div>
+													<div class="control-group">
+															<div class="widget-title"><span class="icon"><i class="icon-user"></i></span>
+																<h5>Participant Details</h5>
+															</div>
+													</div>
+													
+													<div class="control-group">
+															<div class="controls">
+																	<div class="span4">
+																		<div class="uploader disabled" id="uniform-undefined" style=""><input type="file" disabled="disabled" class="ui-wizard-content" size="19" style="opacity: 0;"><span class="filename">No file selected</span><span class="action">Choose File</span></div>Upload
+																	</div>
+																	<div class="span3 dwnd-link"><i class="icon-download-alt"></i>
+																		<a href="#"> Download Template</a>
+																	</div>
+															</div>
+															
+														<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Students / Entrepreneur</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Email Id</th>
+											<th>Mobile No.</th>
+											<th>Fees Paid</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Row 1</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+										</tr>
+										<tr>
+											<td>Row 1</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+										</tr>
+										<tr>
+											<td>Row 1</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td><i class="icon-plus"></i><a href="#"> Add an Entry</a></td>
+										</tr>
+										
+										
+										
+									</tbody>
+								</table>		
+									
+									</div>
+													
+													
+													
+													
+											</div>
+													<div class="form-actions">
+															<input id="back" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="reset" value="Back" disabled="disabled">
+															<input id="next" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="submit" value="Next">
+															<div id="status"></div>
+													</div>
+												<div id="submitted"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				
+				
+				<div class="row-fluid">
+					<div id="footer" class="span12">
+						2012 © NAN Admin.
+					</div>
+				</div>
+			</div>
