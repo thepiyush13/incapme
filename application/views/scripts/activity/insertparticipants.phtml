@@ -9,7 +9,7 @@
 										<h5>Create new activity</h5>
 									</div>
 									<div class="widget-content nopadding">
-										<form  class="form-horizontal" name="insertactivityparticipants" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertParticipants" method="post" >
+                                        <form  class="form-horizontal" name="insertactivityparticipants" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertParticipants" method="post" enctype="multipart/form-data" >
 											
 													<div class="control-group">
 															<div class="span9 offset2">
@@ -57,7 +57,7 @@
 													<div class="control-group">
 															<div class="controls">
 																	<div class="span4">
-																		<input type="file" />Upload
+																		<input type="file" name="fileParticipant" />Upload
 																	</div>
 																	<div class="span3 dwnd-link"><i class="icon-download-alt"></i>
 																		<a href="#"> Download Template</a>

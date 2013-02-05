@@ -9,7 +9,7 @@
 										<h5>Create new activity</h5>
 									</div>
 									<div class="widget-content nopadding">
-										<form  class="form-horizontal" name="insertactivityoutcome" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertOutcomes" method="post" >
+                                        <form  class="form-horizontal" name="insertactivityoutcome" action="<?php echo $_SERVER['PHP_SELF'] ?>?type=insertOutcomes" method="post" enctype="multipart/form-data" >
 											
 													<div class="control-group">
 													<div class="span9 offset2">
@@ -84,13 +84,13 @@
 												<div class="control-group">
 														<label class="control-label">Number of Mentees :</label>
 														<div class="controls form-input">
-															<input type="number" name="activityoutcome_mentees" id="activityoutcome_mentees" placeholder="Number of Mentees" />
+															<input type="file" name="activityoutcome_menteeslist" id="activityoutcome_mentees" placeholder="Number of Mentees" />
 														</div>
 												</div>
 												<div class="control-group">
 														<label class="control-label">Nunber of Mentors :</label>
 														<div class="controls form-input">
-															<input type="number" name="activityoutcome_mentors" id="activityoutcome_mentors" placeholder="Nunber of Mentors" />
+															<input type="file" name="activityoutcome_mentorslist" id="activityoutcome_mentors" placeholder="Nunber of Mentors" />
 														</div>
 												</div>	
                            <input type="text" name="activityoutcome_menteeslist[]" id="activityoutcome_menteeslist[]" value="f1|l-e|email-e" />

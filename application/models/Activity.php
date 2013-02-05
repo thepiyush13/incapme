@@ -59,7 +59,7 @@ class Application_Model_Activity extends Application_Model_Db
         }
         $sql[] = 'DELETE FROM activity_contributor_corodinator WHERE activity_id='.$activityId;        
         $sql[]='INSERT INTO activity_contributor_corodinator(activity_id,human_id,unmapped_coordinator) VALUES'.implode(',',$vals);      
-        $vals = array();
+        $vals = array(); 
         
         //updating the presenter table
         foreach($leadPresenters as $key=>$val){
@@ -113,50 +113,89 @@ class Application_Model_Activity extends Application_Model_Db
         $vals = array();
         $sql = array();
         $activityId  = mysql_real_escape_string ( $data['activity_id'] );
+        $result['activity_id'] = $activityId; 
         //$data  = array_map('mysql_real_escape_string', $data);
         //calulate count fields 
         $activitybeneficiaries_number = mysql_real_escape_string ($data['activitybeneficiaries_number']) ;
         $activitybeneficiaries_institute = mysql_real_escape_string ($data['activitybeneficiaries_institute']);
         $activitybeneficiaries_fees = mysql_real_escape_string ($data['activitybeneficiaries_fees']) ;        
-        $participantFile = $data['file']  ;
+        $participantFile = $_FILES['fileParticipant']  ;
         
-        if($participant){
+        
+        
+        if($participantFile){
             $options = array('mime'=>'text/csv','size'=>50000);
+            $options['fileFormat'] = array("S. No.","Category","First name","Last name","Date of birth","M/F","email","phone","Performance remarks");
+            $options['cols']  = "(category,first_name,last_name,dob,gender,email,phone,performance_remarks,activity_id,human_id)";
+            $options['table'] = 'activity_participants';
             $result = $this->_uploadFile($participantFile,$options);
-            
-            if($result['error']){
-                return $result;                
-              }
-            
-            $query = $result['data'];
+            if($result['error'] ){
+               return $result; $result['activity_id'] = $activityId;                
+             }
+            if (($handle = fopen($result['data'], "r")) == FALSE) {
+            $result['error'] =  'Unknown Error Occured,Please Try again';
+            return $result; 
+            }
+            /* all good so go ahead */
+            $row = 1;
+            while (($line = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if($row ==1){
+
+                    //$cols  =  '("'.implode('","',$line ).'")';
+                    /* put file format logic here */
+                    for($count =0;$count<count($line);$count++){
+                        if( !($line[$count]==$options['fileFormat'][$count]) ){
+                            $result['error'] =  'Incorrect File Format uploaded , please correct the file column format and try again';
+                        return $result; 
+                        } 
+                    }             
+
+                }
+                array_shift($line); /* to remove first S No column*/ 
+                $vals[] = '("'. implode('","',$line).'",'.$activityId.',null)';
+                
+                $row++;
+            }
+            fclose($handle);
+            $cols = $options['cols'];
+            $query  = 'INSERT INTO '.$options['table']. $cols .' VALUES'.implode(',',$vals); 
+ 
             $this->mysqli->autocommit(FALSE);
-            $qR = $this->mysqli->query($value);
+            $qR = $this->mysqli->query($query);
 
             if(!$qR){
                 $this->mysqli->rollback();
                 $result['error'] = 'Could not Insert the data:'.$this->mysqli->error;  
-                return $result;
+                return $result; 
                  }
 
             $out = $this->mysqli->commit();
-            $activitybeneficiaries_number = $this->mysqli->query('SELECT DISTINCT COUNT(*) FROM activity_participants WHERE activity_id='.$activityId);
-            //$activitybeneficiaries_institute = $this->mysqli->query('SELECT DISTINCT COUNT(*) FROM activity_participants WHERE activity_id='.$activityId.' AND category="student"');
+            $this->mysqli->autocommit(TRUE);
+            
+            $qR = $this->mysqli->query('SELECT DISTINCT COUNT(*) as count FROM activity_participants WHERE activity_id='.$activityId);
+            $row = $qR->fetch_assoc();
+            $activitybeneficiaries_number  = $row['count'] ;
+            
+            $qR = $this->mysqli->query('SELECT DISTINCT COUNT(*) as count FROM activity_participants WHERE activity_id='.$activityId.' AND category="student"');
+            $row = $qR->fetch_assoc();
+            $activitybeneficiaries_institute  = $row['count'] ;
                      
        
         }
         
         
+        
         $vals = array();   
         // the main activity table
         $stmt = 'activitybeneficiaries_number="'.$activitybeneficiaries_number.'",activitybeneficiaries_institute="'.$activitybeneficiaries_institute.'"';        $sql = 'UPDATE activity SET '.$stmt.' WHERE activity_id='.$activityId;   
-        $qR = $this->mysqli->query($value);  
+        $qR = $this->mysqli->query($sql);  
         if(!$qR){
             $result['error'] = 'Could not Insert the activity:'.$this->mysqli->error; 
-            return $result;
+            return $result; 
         }
         $result['success'] = 'Successfully updated the activity'; 
-        $result['activity_id'] = $activityId;   
-        return $result;
+         
+        return $result; 
     }
     function insertOutcomes ($data) {
         // get values to be saved in the contributor table
@@ -164,28 +203,110 @@ class Application_Model_Activity extends Application_Model_Db
         $aR = array();  
         $vals = array();
         $sql = array();
-        //$data  = array_map('mysql_real_escape_string', $data);
-        $menteeslist = $data['activityoutcome_menteeslist']  ;
-        $mentorslist = $data['activityoutcome_mentorslist'] ;
         $activityId  = mysql_real_escape_string ( $data['activity_id'] );
-        
-        //updating the contributor table
-        foreach($menteeslist as $key=>$val){
+        $menteeslistFile = $_FILES['activityoutcome_menteeslist']  ;
+        $mentorslistFile = $_FILES['activityoutcome_mentorslist']  ;
+        //$data  = array_map('mysql_real_escape_string', $data);
+        /* reading the files for mentees and mentor list  */
+        if($menteeslistFile){
+            $options = array('mime'=>'text/csv','size'=>50000);
+            $options['fileFormat'] = array("S. No.","Category","First name","Last name","Date of birth","M/F","email","phone","Mentored by");
+            $options['cols']  = "('id','category','first_name','last_name','dob','gender','email','phone','performance_remarks','mentored_by','activity_id','human_id')";
+            $options['table'] = 'activity_outcome_mentees_list';
+            $result = $this->_uploadFile($menteeslistFile,$options);
+            if($result['error'] ){
+               return $result; $result['activity_id'] = $activityId;                
+             }
+            if (($handle = fopen($result['data'], "r")) == FALSE) {
+            $result['error'] =  'Unknown Error Occured,Please Try again';
+            return $result; 
+            }
+            /* all good so go ahead */
+            $row = 1;
+            while (($line = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if($row ==1){
+
+                    //$cols  =  '("'.implode('","',$line ).'")';
+                    /* put file format logic here */
+                    for($count =0;$count<count($line);$count++){
+                        if( !($line[$count]==$options['fileFormat'][$count]) ){
+                            $result['error'] =  'Incorrect File Format uploaded , please correct the file column format and try again';
+                        return $result; 
+                        } 
+                    }             
+
+                }
+                array_shift($line); /* to remove first S No column*/ 
+                $vals[] = '("'. implode('","',$line).'",'.$activityId.',null)';
+                
+                $row++;
+            }
+            fclose($handle);
+            
+        }
+        else{
+            $menteeslist = $data['activityoutcome_menteeslist']  ;
+            foreach($menteeslist as $key=>$val){
             $val = explode('|',mysql_real_escape_string( $val) );
             $vals[]= '('.$activityId.',"'.implode('","',$val) .'")' ;
+            }
         }
+         //updating the contributor table
+        
         $sql[] = 'DELETE FROM activity_outcome_mentees_list WHERE activity_id='.$activityId;        
         $sql[]='INSERT INTO activity_outcome_mentees_list(activity_id,first_name,last_name,email) VALUES'.implode(',',$vals);      
         $vals = array();
         
-        //updating the presenter table
-        foreach($mentorslist as $key=>$val){
+        if($mentorslistFile){
+            $options = array('mime'=>'text/csv','size'=>50000);
+            $options['fileFormat'] = array("S. No.","Category","First name","Last name","Date of birth","M/F","email","phone","Performance remarks");
+            $options['cols']  = "(category,first_name,last_name,dob,gender,email,phone,performance_remarks,activity_id,human_id)";
+            $options['table'] = 'activity_outcome_mentors_list';
+            $result = $this->_uploadFile($mentorslistFile,$options);
+            if($result['error'] ){
+               return $result; $result['activity_id'] = $activityId;                
+             }
+            if (($handle = fopen($result['data'], "r")) == FALSE) {
+            $result['error'] =  'Unknown Error Occured,Please Try again';
+            return $result; 
+            }
+            /* all good so go ahead */
+            $row = 1;
+            while (($line = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if($row ==1){
+
+                    //$cols  =  '("'.implode('","',$line ).'")';
+                    /* put file format logic here */
+                    for($count =0;$count<count($line);$count++){
+                        if( !($line[$count]==$options['fileFormat'][$count]) ){
+                            $result['error'] =  'Incorrect File Format uploaded , please correct the file column format and try again';
+                        return $result; 
+                        } 
+                    }             
+
+                }
+                array_shift($line); /* to remove first S No column*/ 
+                $vals[] = '("'. implode('","',$line).'",'.$activityId.',null)';
+                
+                $row++;
+            }
+            fclose($handle);
+        }else{
+            $mentorslist = $data['activityoutcome_mentorslist'] ;
+            foreach($mentorslist as $key=>$val){
             $val = explode('|',mysql_real_escape_string( $val) );
             $vals[]= '('.$activityId.',"'.implode('","',$val) .'")' ;
+            }
         }
+        //updating the presenter table
+        
         $sql[] = 'DELETE FROM activity_outcome_mentors_list WHERE activity_id='.$activityId;  
         $sql[] = 'INSERT INTO activity_outcome_mentors_list(activity_id,first_name,last_name,email) VALUES'.implode(',',$vals);
         $vals = array();   
+       
+       
+        
+        
         // the main activity table
         $stmt = 'activityoutcome_instructor="'.$data['activityoutcome_instructor']
                 .'",activityoutcome_course="'.$data['activityoutcome_course']
@@ -377,21 +498,21 @@ class Application_Model_Activity extends Application_Model_Db
         $query = array();
         $vals = array();
         $goodtogo = true;
-        $allowedmimes = $options['mime'];
+        $allowedMimes = $options['mime'];
+        $fileFormat = $options['fileFormat']; // array('column1','column2','column3')
         $size = $options['size'];
-        try{
-            if ( ($_FILES[$data['name']]['size'] == 0) || ($_FILES[$data['name']]['size'] > $size)   ){
-                $goodtogo = false;
-                throw new exception ("Could not upload the file: Invalid File Format");
-            }
+        
+       
+        if ( ($data['size'] == 0) || ($data['size'] > $size)   ){
+            $goodtogo = false;
+            $result['error'] =   "Could not upload the file: Invalid File Format";
+            return $result;
         }
-        catch (exception $e) {
-            $result['error'] = $e->getmessage();
-        }
+      
 
         try {
-            $target = "uploads/".$_FILES[$data['name']]['name'].".csv";
-            $source  = $_FILES[$data['name']]['tmp_name']; 
+            $target = "../uploads/".$data['name'].".csv";
+            $source  = $data['tmp_name']; 
             if (!move_uploaded_file ($source,$target) ){
             $goodtogo = false;
             throw new exception ("There was an error moving the file.");
@@ -399,28 +520,23 @@ class Application_Model_Activity extends Application_Model_Db
             
         } catch (exception $e) {
             $result['error'] =  $e->getmessage();
+            return $result;
         }
         
-        
-        if($goodtogo){
-                $row = 1;
-                if (($handle = fopen($target, "r")) !== FALSE) {
-                    while (($line = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                        if($row ==1){
-                            $cols  = '("'.implode('","',$line ).'")';
-                        }else{
-                            $vals[] = '("'. implode('","',$line).'")';
-                        }
-                        $row++;
-                    }
-                    fclose($handle);
-                }
-            }
-        
+        if(!$goodtogo){
+            $result['error'] =  'File Not Uploaded,Please Try again';
+            return $result;
+        }
+        $result['data'] = $target; 
+        $result['error'] = "";
+        return $result;
          
-         
-         $result['data']  = 'INSERT INTO '.$data['table']. $cols .' VALUES'.implode(',',$vals); 
-         return $result;
+       
+   }
+   public function result($msg){
+       $result = $msg;       
+       $result['activity_id'] = $data['activity_id'];
+       return $result;
    }
 }
 
