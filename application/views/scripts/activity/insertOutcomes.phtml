@@ -1,3 +1,13 @@
+<div id="notification" class="alert">
+            <?php if (!empty($this->output)){?>
+            <ul>
+            <?php foreach ($this->output as $type=>$message): ?>
+            <li><?php echo $type.':'.$message; ?></li>
+            <?php endforeach; ?>
+            <ul>
+            <?php } ?>
+            
+        </div>
 <div class="row-fluid">
 						<div class="row-fluid">
 							<div class="span12">

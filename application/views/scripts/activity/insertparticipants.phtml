@@ -1,3 +1,13 @@
+<div id="notification" class="alert">
+            <?php if (!empty($this->output)){?>
+            <ul>
+            <?php foreach ($this->output as $type=>$message): ?>
+            <li><?php echo $type.':'.$message; ?></li>
+            <?php endforeach; ?>
+            <ul>
+            <?php } ?>
+            
+        </div>
 <div class="row-fluid">
 						<div class="row-fluid">
 							<div class="span12">
@@ -57,6 +67,7 @@
 													<div class="control-group">
 															<div class="controls">
 																	<div class="span4">
+                                                                        
 																		<input type="file" name="fileParticipant" />Upload
 																	</div>
 																	<div class="span3 dwnd-link"><i class="icon-download-alt"></i>
@@ -99,6 +110,15 @@
 											</div>
 												
 										</form>
+                                        <!-- Iframe file upload -->
+                                                                                    <form method="post"  id="form_overview_members" name = "form_overview_members" enctype="multipart/form-data" action="/index.php/activity/uploadparticipants" target="target_overview_members">
+             <input type="file" id = "overview_members" name = "fileParticipant"  />
+             <input type="hidden" name="activity_id" value="40" /><br />
+             <iframe id = "target_overview_members" name = "target_overview_members" style="display: inline;"></iframe>
+             </form>
+                                                                        
+                                                                       
+                                                                        <!-- iframe file upload -->
 									
 								</div>
 							</div>

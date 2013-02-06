@@ -41,15 +41,15 @@ class ActivityController extends Zend_Controller_Action
         
     }
     public function addAction() {
-        //init
+        
+//init
         
         //provides navigation path for the next view
         $nextForm = array('new'=>'insertActivityInfo','insertActivityInfo'=>'insertContributors','insertContributors'=>'insertParticipants','insertParticipants'=>'insertOutcomes','insertOutcomes'=>'activityDetails');
-        
+        $type = $this->_getParam('type','new');
         // if request is post - check vaidation and call respective model 
         // else just display the default form view
         if($this->_request->getPost()) {
-            $type = $this->_getParam('type','new');
             $data = $this->_request->getPost();
             $isValid = $this->_validation($data, $type);
             if ( $isValid['error'] == TRUE ){
@@ -73,7 +73,8 @@ class ActivityController extends Zend_Controller_Action
            }
         }
         else{
-            echo $this->view->render('activity/'.$nextForm['new'].'.phtml');
+            //echo $this->view->render('activity/'.$nextForm['new'].'.phtml');
+            echo $this->view->render('activity/'.$type.'.phtml');
         }
 
 
@@ -164,6 +165,21 @@ class ActivityController extends Zend_Controller_Action
         $mdlList  = new Application_Model_Activity();
         $output = $mdlList->getList();
         return  $output ;
+    }
+    public function uploadparticipantsAction(){
+        $this->_helper->layout()->disableLayout();
+         $data  = $_FILES['fileParticipant'];
+         $activityId = $this->_request->getPost('activity_id');
+         $data['activity_id'] = $activityId;
+        if($data['size'] != 0 ){           
+            $mdl  = new Application_Model_Activity();
+            $output = $mdl->uploadParticipants($data);
+            echo $output;
+            
+        }
+        else{
+            echo 'Error Uploading file';
+        }
     }
     
     

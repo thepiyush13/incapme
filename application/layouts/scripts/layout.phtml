@@ -54,7 +54,7 @@
 			</ul>
 		</div>
 		
-	
+        
 		
 		<div id="content">
 		<?php echo $this->layout()->content ?>	
@@ -65,14 +65,30 @@
               <script src="/js/jquery.js"></script>
             
             <script src="/js/bootstrap.min.js"></script>
-            <script src="js/bootstrap-colorpicker.js"></script>
+            <script src="/js/bootstrap-colorpicker.js"></script>
             <script src="/js/bootstrap-datepicker.js"></script>
-            <script src="js/jquery.uniform.js"></script>
-            <script src="js/select2.min.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.form_common.js"></script>
-			
-           
+            <script src="/js/jquery.uniform.js"></script>
+            <script src="/js/select2.min.js"></script>
+            <script src="/js/unicorn.js"></script>
+            <script src="/js/unicorn.form_common.js"></script>
+			 
+           <script>
+    jQuery(document).ready(function(){
+        jQuery("input:file").unbind('change').bind('change', function(e) {
+            var frm = 'form_'+jQuery(this).attr('id');
+            console.log(frm);
+            //documefrm].submit();
+            jQuery('#'+frm).submit();
+        });
+    });
+
+    function uploaFiles() {	
+        var m = jQuery('#target_overview_members');
+        var ret = m.contents().find('body').html();
+        // processing 
+    }
+
+</script>
 			
             
 	</body>
